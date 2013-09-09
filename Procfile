@@ -1,1 +1,1 @@
-web: bin/hubot -a campfire -n buffbot
+web: bin/hubot -a campfire -n buffy
