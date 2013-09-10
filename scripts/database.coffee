@@ -41,7 +41,7 @@ module.exports = (robot) ->
     }
 
     rds.describeDBInstances {DBInstanceIdentifier: 'mb-production'}, (err, data) ->
-      if !err && data.DBInstances[0] && data.DBInstances[0].DBInstanceStatus == 'available' then steps.statusCheck.reject() else steps.statusCheck.resolve()
+      if !err && data.DBInstances[0] && data.DBInstances[0].DBInstanceStatus == 'available' then steps.statusCheck.resolve() else steps.statusCheck.reject()
 
     steps.statusCheck.fail -> msg.reply "The mb-production database isn't currently up and available. Is something else going on?"
     steps.statusCheck.done -> msg.reply "The production database is ready. Starting the copy now..."
