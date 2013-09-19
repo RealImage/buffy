@@ -11,13 +11,15 @@ AWS = require 'aws-sdk'
 AWS.config.update {
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-  region: 'ap-southeast-1'
 }
 _ = require 'underscore'
 defer = require 'simply-deferred'
 util = require 'util'
 
-rds = new AWS.RDS({apiVersion: '2013-05-15'})
+rds = new AWS.RDS({
+  apiVersion: '2013-05-15'
+  region: 'ap-southeast-1'
+})
 
 waitTillAvailable = (dbIdentifier) ->
   completionDeferred = new defer.Deferred()
