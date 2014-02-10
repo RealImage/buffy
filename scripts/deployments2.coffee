@@ -23,7 +23,7 @@ autoscaling = new AWS.AutoScaling region: 'ap-southeast-1'
 
 
 deploy = (msg) ->
-  groupName = '201502052207-moviebuff-ondemand'
+  groupName = '201402092305-moviebuff-fullstack'
   autoscaling.describeAutoScalingGroups {AutoScalingGroupNames: [groupName]}, (err, data) ->
     instancesInService =  _.select data.AutoScalingGroups[0].Instances, (instance) -> instance.LifecycleState == 'InService'
     startingInstances = data.AutoScalingGroups[0].Instances.length
