@@ -23,7 +23,7 @@ autoscaling = new AWS.AutoScaling region: 'ap-southeast-1'
 
 
 deploy = (msg) ->
-  groupName = '201402092305-moviebuff-fullstack'
+  groupName = ({prod: 'moviebuff-prod-main', testing: 'moviebuff-testing-spot2'})[msg.match[1]]
   autoscaling.describeAutoScalingGroups {AutoScalingGroupNames: [groupName]}, (err, data) ->
     instancesInService =  _.select data.AutoScalingGroups[0].Instances, (instance) -> instance.LifecycleState == 'InService'
     startingInstances = data.AutoScalingGroups[0].Instances.length
@@ -56,6 +56,6 @@ deploy = (msg) ->
 
 
 module.exports = (robot) ->
-  robot.respond /bounce/i, deploy
+  robot.respond /bounce (.*)/i, deploy
 
 
